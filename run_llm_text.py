@@ -1,7 +1,6 @@
-from deep_translator import GoogleTranslator
+from deep_translator import MyMemoryTranslator as translator
 import ollama
 import re
-
 
 def split_sentences(text):
     # 使用正则表达式按照句子结束符分割文本
@@ -9,7 +8,7 @@ def split_sentences(text):
     return sentences
 
 def translate_and_print(text):
-    translated_text = GoogleTranslator(source='auto', target='zh-CN').translate(text)
+    translated_text = translator(source='en-US', target='zh-CN').translate(text)
     print(translated_text)
 
 def chat_with_llm():
@@ -20,7 +19,7 @@ def chat_with_llm():
             break
 
         # 将用户输入的中文翻译成英文
-        translated_input = GoogleTranslator(source='auto', target='en').translate(user_input)
+        translated_input = translator(source='zh-CN', target='en-US').translate(user_input)
 
         # 发送翻译后的英文输入给模型
         stream = ollama.chat(
