@@ -7,7 +7,7 @@ def speak_text(text):
 
     # 设置语速 (可选)
     rate = engine.getProperty('rate')
-    engine.setProperty('rate', 150)  # 调整语速为150字/分钟
+    engine.setProperty('rate', 200)  # 调整语速为150字/分钟
 
     # 设置音量 (可选)
     volume = engine.getProperty('volume')

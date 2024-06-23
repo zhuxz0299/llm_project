@@ -21,7 +21,7 @@ def chat_with_llm():
             break
 
         stream = ollama.chat(
-            model='llama3:8b',
+            model='llamafamily/llama3-chinese-8b-instruct:latest',
             messages=[{'role': 'user', 'content': user_input}],
             stream=True,
         )
@@ -30,12 +30,12 @@ def chat_with_llm():
         # 逐步接收和处理响应数据块
         for chunk in stream:
             text = chunk['message']['content']
-            text = clean_markdown(text)
+            # text = clean_markdown(text)
             buffer += text
             print(text, end='', flush=True)
             
             # 如果缓冲区中有完整的句子，则朗读它们
-            sentences = re.split(r'([.!?])', buffer)
+            sentences = re.split(r'([。，.!?])', buffer)
             
             # sentences[-1] 是不完整的句子部分，因此不朗读它
             for i in range(0, len(sentences) - 1, 2):
@@ -44,6 +44,8 @@ def chat_with_llm():
             
             # 更新缓冲区，只保留不完整的句子部分
             buffer = sentences[-1]
+
+        print()
 
 if __name__ == "__main__":
     chat_with_llm()
